@@ -1,14 +1,11 @@
 import { Router } from "express";
 
+import { createCategoryController } from "../modules/cars/usecases/create_category";
+
 const categoriesRoutes = Router();
 
-const categories = [];
-
-categoriesRoutes.get("/categories", (request, response) => {
-    const { name, description } = request.body;
-
-    categories.push({ name, description });
-    return response.status(201);
+categoriesRoutes.post("/", (request, response) => {
+    return createCategoryController.handle(request, response);
 });
 
 export { categoriesRoutes };
