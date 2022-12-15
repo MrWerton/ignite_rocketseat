@@ -16,4 +16,4 @@
 ## Frameworks/libs:
 
 - Express
-- nodemon
+- Nodemon
