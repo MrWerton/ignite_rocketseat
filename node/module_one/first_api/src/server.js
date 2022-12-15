@@ -5,6 +5,18 @@ const app = express();
 app.use(express.json())
 const db = [];
 
+function verifyIfExistsAccountCPF(request, response, next) {
+    const { cpf } = request.headers;
+  
+    const customer = db.find(customer => customer.cpf === cpf);
+  
+    if(!customer)
+      return response.status(400).json({ error: 'Customer not found!' });
+  
+    request.customer = customer;
+    return next();
+  
+  }
 app.post('/account', (request, response) => {
     const {cpf, name} = request.body;
     const id = UUIDV4()
@@ -23,15 +35,10 @@ app.post('/account', (request, response) => {
 
 })
 
-app.get('/statement/:cpf', (request, response)=>{
-    const {cpf} = request.params;
-    const customer = db.find(customer => customer.cpf === cpf);
-    if(customer){
-        const statement = customer.statement;
-        return response.json(statement)
-    }else{
-        return response.status(400).json({error: "customer not exists"})
-    }
+app.get('/statement/',verifyIfExistsAccountCPF, (request, response)=>{
+    const {customer} = request;
+    const statement = customer.statement
+    return response.json(statement)
 })
 const PORT = 4000;
 app.listen(PORT, () => console.log(`Server run`))
