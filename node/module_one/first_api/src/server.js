@@ -8,7 +8,7 @@ const db = [];
 app.post('/account', (request, response) => {
     const {cpf, name} = request.body;
     const id = UUIDV4()
-    const account = {
+    const customer = {
         id,
         cpf,
         name,
@@ -18,11 +18,20 @@ app.post('/account', (request, response) => {
     if(customerAlreadyExists){
         return response.status(400).json({error: "customer already exists"})
     }
-    db.push(account)
-    return response.send(201).send()
+    db.push(customer)
+    return response.status(201).send()
 
 })
 
-
+app.get('/statement/:cpf', (request, response)=>{
+    const {cpf} = request.params;
+    const customer = db.find(customer => customer.cpf === cpf);
+    if(customer){
+        const statement = customer.statement;
+        return response.json(statement)
+    }else{
+        return response.status(400).json({error: "customer not exists"})
+    }
+})
 const PORT = 4000;
 app.listen(PORT, () => console.log(`Server run`))
