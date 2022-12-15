@@ -8,14 +8,14 @@ const db = []
 function getBalance(statement) {
     const balance = statement.reduce((acc, operation) => {
       if(operation.type === 'credit') {
-        return acc + operation.amount;
+        return acc + operation.amount
       } else {
-        return acc - operation.amount;
+        return acc - operation.amount
       }
   
-    },0);
+    },0)
   
-    return balance;
+    return balance
 }
 
 function verifyIfExistsAccountCPF(request, response, next) {
@@ -29,7 +29,8 @@ function verifyIfExistsAccountCPF(request, response, next) {
     request.customer = customer
     return next()
   
-  }
+}
+
 app.post('/account', (request, response) => {
     const {cpf, name} = request.body
     const id = UUIDV4()
@@ -45,7 +46,6 @@ app.post('/account', (request, response) => {
     }
     db.push(customer)
     return response.status(201).send()
-
 })
 
 app.get('/statement/',verifyIfExistsAccountCPF, (request, response)=>{
@@ -91,39 +91,40 @@ app.post('/withdraw', verifyIfExistsAccountCPF, (request, response) => {
 })
 
 app.get('/statement/date', verifyIfExistsAccountCPF, (request, response) => {
-    const { customer } = request;
-    const { date } = request.query;
+    const { customer } = request
+    const { date } = request.query
   
-    const dateFormat = new Date(date + " 00:00");
+    const dateFormat = new Date(date + " 00:00")
   
     const statement = customer.statement.filter(
       (statement) =>
       statement.created_at.toDateString() === new Date(dateFormat).toDateString()
-    );
+    )
   
-    return response.json(statement);
-});
+    return response.json(statement)
+})
 
 app.get('/account', verifyIfExistsAccountCPF, (request, response) => {
-    const { customer } = request;
+    const { customer } = request
   
-    return response.json(customer);
-});
+    return response.json(customer)
+})
 
 app.delete('/account', verifyIfExistsAccountCPF, (request, response) => {
-    const { customer } = request;
+    const { customer } = request
   
-    customers.splice(customer, 1);
+    customers.splice(customer, 1)
   
-    return response.status(200).json(customers);
-});
+    return response.status(200).json(customers)
+})
 
 app.get('/balance', verifyIfExistsAccountCPF, (request, response) => {
-    const { customer } = request;
+    const { customer } = request
   
-    const balance = getBalance(customer.statement);
+    const balance = getBalance(customer.statement)
   
-    return response.status(200).json(balance);
-});
+    return response.status(200).json(balance)
+})
+
 const PORT = 4000
 app.listen(PORT, () => console.log(`Server run`))
