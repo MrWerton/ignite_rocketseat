@@ -18,4 +18,3 @@ class CreateCategoryController {
 }
 
 export { CreateCategoryController };
-

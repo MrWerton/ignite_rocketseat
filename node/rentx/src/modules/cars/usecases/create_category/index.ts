@@ -9,4 +9,3 @@ const createCategoryController = new CreateCategoryController(
 );
 
 export { createCategoryController };
-

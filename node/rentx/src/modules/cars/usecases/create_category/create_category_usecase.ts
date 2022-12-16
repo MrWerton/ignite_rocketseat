@@ -22,4 +22,3 @@ class CreateCategoryUseCase {
 }
 
 export { CreateCategoryUseCase };
-

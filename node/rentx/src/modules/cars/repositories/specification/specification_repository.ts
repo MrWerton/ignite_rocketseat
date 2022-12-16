@@ -1,13 +1,15 @@
 import { Specification } from "../../entities/specification";
-import { ICreateSpecificationDTO, ISpecificationsRepository } from "./Ispecification_repository";
-
+import {
+    ICreateSpecificationDTO,
+    ISpecificationsRepository,
+} from "./Ispecification_repository";
 
 class SpecificationsRepository implements ISpecificationsRepository {
     private specifications: Specification[];
 
     constructor() {
         this.specifications = [];
-    };
+    }
 
     create({ description, name }: ICreateSpecificationDTO): void {
         const specification = new Specification();
@@ -19,7 +21,7 @@ class SpecificationsRepository implements ISpecificationsRepository {
         });
 
         this.specifications.push(specification);
-    };
+    }
 
     findByName(name: string): Specification | undefined {
         const specification = this.specifications.find(
@@ -27,9 +29,7 @@ class SpecificationsRepository implements ISpecificationsRepository {
         );
 
         return specification;
-    };
-
-};
+    }
+}
 
 export { SpecificationsRepository };
-

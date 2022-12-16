@@ -9,4 +9,3 @@ const listCategoriesController = new ListCategoriesController(
 );
 
 export { listCategoriesController };
-

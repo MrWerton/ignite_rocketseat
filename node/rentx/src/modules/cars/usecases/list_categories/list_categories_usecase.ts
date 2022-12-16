@@ -15,4 +15,3 @@ class ListCategoriesUseCase {
 }
 
 export { ListCategoriesUseCase };
-

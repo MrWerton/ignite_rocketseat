@@ -15,4 +15,3 @@ class ListCategoriesController {
 }
 
 export { ListCategoriesController };
-
