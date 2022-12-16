@@ -1,5 +1,5 @@
 import { Category } from "../../entities/category";
-import { ICategoriesRepository } from "../../repositories/category/Icategory_repository_imp";
+import { ICategoriesRepository } from "../../repositories/category/Icategory_repository";
 
 class ListCategoriesUseCase {
     private categoriesRepository: ICategoriesRepository;
