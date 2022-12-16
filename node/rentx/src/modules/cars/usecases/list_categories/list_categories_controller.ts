@@ -7,8 +7,8 @@ class ListCategoriesController {
     constructor(listCategoriesUseCase: ListCategoriesUseCase) {
         this.listCategoriesUseCase = listCategoriesUseCase;
     }
-    handle(_: Request, response: Response): Response {
-        const allCategories = this.listCategoriesUseCase.execute();
+    async handle(_: Request, response: Response): Promise<Response> {
+        const allCategories = await this.listCategoriesUseCase.execute();
 
         return response.json(allCategories);
     }
