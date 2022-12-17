@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+
 import { ImportCategoriesUseCase } from "./import_category_usecase";
 
 class ImportCategoriesController {
@@ -8,10 +9,9 @@ class ImportCategoriesController {
     }
     handle(request: Request, response: Response): Response {
         const { file } = request;
-        this.importCategoriesUseCase.execute(file!)
+        this.importCategoriesUseCase.execute(file!);
         return response.send();
     }
 }
 
 export { ImportCategoriesController };
-
