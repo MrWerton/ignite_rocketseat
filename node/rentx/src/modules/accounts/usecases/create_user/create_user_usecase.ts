@@ -1,6 +1,7 @@
 import { hash } from "bcryptjs";
 import { inject, injectable } from "tsyringe";
 
+import { AppError } from "../../../../errors/app_error";
 import { IUserRepository } from "../../repositories/Iuser_repository";
 
 interface IRequestParams {
@@ -25,7 +26,7 @@ export class CreateUserUseCase {
         const passwordHash = await hash(password, 8);
         const userAlreadyExists = await this.repository.findUserByEmail(email);
         if (userAlreadyExists) {
-            throw new Error("userr already exists");
+            throw new AppError("user already exists", 409);
         }
         await this.repository.createUser({
             name,
