@@ -4,10 +4,11 @@ import { v4 as UUIDV4 } from "uuid";
 @Entity("users")
 export class User {
     @PrimaryColumn()
-    id?: string;
+    readonly id?: string;
     @Column()
     name: string;
-
+    @Column()
+    avatar: string;
     @Column()
     email: string;
     @Column()

@@ -20,12 +20,14 @@ export class UserRepository implements IUserRepository {
     }
 
     async createUser(data: ICreateUserDTO): Promise<void> {
-        const { name, email, password, drive_license } = data;
+        const { name, email, password, drive_license, avatar, id } = data;
         const user = this.repository.create({
             name,
             drive_license,
             password,
             email,
+            avatar,
+            id,
         });
         await this.repository.save(user);
     }
