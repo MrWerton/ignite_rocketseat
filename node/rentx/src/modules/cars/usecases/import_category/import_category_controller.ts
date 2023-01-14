@@ -9,7 +9,9 @@ class ImportCategoriesController {
         const importCategoriesUseCase = container.resolve(
             ImportCategoriesUseCase
         );
-        importCategoriesUseCase.execute(file!);
+        if (file) {
+            importCategoriesUseCase.execute(file);
+        }
         return response.send();
     }
 }
