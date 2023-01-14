@@ -31,13 +31,13 @@ export class AuthenticateUserUseCase {
         const user = await this.repository.findUserByEmail(email);
 
         if (!user) {
-            throw new AppError("Email or password incorrect", 401);
+            throw new AppError("Email or password incorrect", 400);
         }
 
         const passwordMatch = await compare(password, user.password);
 
         if (!passwordMatch) {
-            throw new AppError("Email or password incorrect", 401);
+            throw new AppError("Email or password incorrect", 400);
         }
 
         // generated md5
